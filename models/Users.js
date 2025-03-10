@@ -23,6 +23,16 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
+  firebaseUid: {
+    type: String,
+    sparse: true,
+    index: true
+  },
+  authProvider: {
+    type: String,
+    enum: ['local', 'google', 'facebook'],
+    default: 'local'
+  },
   refreshTokens: [{
     type: String,
     // Storing token IDs for validation and revocation

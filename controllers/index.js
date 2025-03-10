@@ -1,1 +1,2 @@
-module.exports.authController = require("./auth-controller");
+module.exports.authController = require("./auth-controller.js");
+module.exports.oauthController = require('./oauth-controller');
