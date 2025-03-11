@@ -13,5 +13,6 @@ module.exports = Object.freeze({
     "/api/auth/verify-email",
     "/api/auth/resend-verification-email",
     "/api/auth/refresh-token",
+    "/api/auth/google/signin"
   ],
 });
