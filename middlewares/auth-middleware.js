@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config/config'); 
-const { User } = require('../models/Users');
+const jwt = require("jsonwebtoken");
+const config = require("../config/config");
+const { User } = require("../models/Users");
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -9,12 +9,12 @@ const authMiddleware = async (req, res, next) => {
       return next();
     }
 
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+    const token = req.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {
-      return res.status(401).json({ 
-        status: false, 
-        message: 'No token, authorization denied' 
+      return res.status(401).json({
+        status: false,
+        message: "No token, authorization denied",
       });
     }
 
@@ -23,9 +23,9 @@ const authMiddleware = async (req, res, next) => {
     const user = await User.findOne({ _id: decoded.userId });
 
     if (!user) {
-      return res.status(401).json({ 
-        status: false, 
-        message: 'User not found' 
+      return res.status(401).json({
+        status: false,
+        message: "User not found",
       });
     }
 
@@ -33,24 +33,24 @@ const authMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    
-    if (error.name === 'JsonWebTokenError') {
-      return res.status(401).json({ 
-        status: false, 
-        message: 'Invalid token' 
+
+    if (error.name === "JsonWebTokenError") {
+      return res.status(401).json({
+        status: false,
+        message: "Invalid token",
       });
     }
-    
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({ 
-        status: false, 
-        message: 'Token expired' 
+
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({
+        status: false,
+        message: "Token expired",
       });
     }
-    
-    res.status(500).json({ 
-      status: false, 
-      message: 'Server error during authentication' 
+
+    res.status(500).json({
+      status: false,
+      message: "Server error during authentication",
     });
   }
 };
